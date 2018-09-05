@@ -22,10 +22,10 @@ app.use('/',appRoutes);
 app.use('/usuario',usuarioRoutes);
 app.use('/login',loginRoutes);
 
-var DB = require('../config/config').DB;
+
 
 //Conexion a la base de datos
-mongoose.connection.openUri(DB, (err, res) => {
+mongoose.connection.openUri('mongodb://heroku_xgt82gb3:87l2s0tde24hcai7kd15bhktbr@ds245772.mlab.com:45772/heroku_xgt82gb3', (err, res) => {
     if (err) throw err;
 
     console.log('Base de datos: \x1b[32m%s\x1b[0m', 'online');
