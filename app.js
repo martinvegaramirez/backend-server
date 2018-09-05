@@ -27,7 +27,7 @@ var db = require('./config/config').db;
 var port = require('./config/config').port;
 
 //Conexion a la base de datos
-mongoose.connection.openUri(db+ ':' +port, (err, res) => {
+mongoose.connection.openUri(db, (err, res) => {
     if (err) throw err;
 
     console.log('Base de datos: \x1b[32m%s\x1b[0m', 'online');
