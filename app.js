@@ -23,11 +23,10 @@ app.use('/usuario',usuarioRoutes);
 app.use('/login',loginRoutes);
 
 
-var db = require('./config/config').db;
-var port = require('./config/config').port;
+var config = require('./config/config');
 
 //Conexion a la base de datos
-mongoose.connection.openUri(db, (err, res) => {
+mongoose.connection.openUri(config.db, (err, res) => {
     if (err) throw err;
 
     console.log('Base de datos: \x1b[32m%s\x1b[0m', 'online');
@@ -36,6 +35,6 @@ mongoose.connection.openUri(db, (err, res) => {
 
 
 //Escuchar peticiones
-app.listen(3000, () => {
-    console.log('Express server puerto 3000: \x1b[32m%s\x1b[0m', 'online');
+app.listen(config.port, () => {
+    console.log('Express server puerto ${config.port} : \x1b[32m%s\x1b[0m', 'online');
 });

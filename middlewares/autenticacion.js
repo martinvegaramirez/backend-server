@@ -1,12 +1,13 @@
 var jwt = require('jsonwebtoken');
-var SEED = require('../config/config').SEED;
+var config = require('./config/config');
+
 
 //===============================
 //Verificar token
 //===============================
 exports.verificaToken = function(req,res,next){
     var token = req.query.token;
-    jwt.verify( token, SEED, (err,decoded)=>{
+    jwt.verify( token, config.SEED, (err,decoded)=>{
         if (err) {
             return res.status(401).json({
                 ok: false,
