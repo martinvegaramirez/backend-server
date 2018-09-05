@@ -39,7 +39,7 @@ app.post('/', (req, res)=>{
         }
 
         //Crear un token
-        var config = require('./config/config');
+        var config = require('../config/config');
         var token = jwt.sign({usuario:usuarioDB}, config.SEED,{ expiresIn: 14400 }); //4horas
         usuarioDB.password = ':)';
         res.status(200).json({
