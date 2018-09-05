@@ -23,8 +23,8 @@ app.use('/usuario',usuarioRoutes);
 app.use('/login',loginRoutes);
 
 
-var db = require('../config/config').db;
-var port = require('../config/config').port;
+var db = require('./config/config').db;
+var port = require('./config/config').port;
 
 //Conexion a la base de datos
 mongoose.connection.openUri(db+ ':' +port, (err, res) => {
