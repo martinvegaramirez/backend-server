@@ -8,7 +8,22 @@ var app = express();
 
 var Usuario = require('../models/usuario');
 
+var mdAutenticacion = require('../middlewares/autenticacion');
 
+// ==============================
+// Renovacion de TOKEN
+// ==============================
+app.get('/renuevatoken', mdAutenticacion.verificaToken, ( req, res )=>{
+    var token = jwt.sign({usuario:req.usuario}, config.SEED,{ expiresIn: 14400 }); //4horas
+    res.status(200).json({    
+        ok: true,    
+        token: token    
+    });   
+});
+
+// ==============================
+// Login de usuario
+// ==============================
 app.post('/', (req, res)=>{
     var body = req.body;
 
@@ -53,11 +68,5 @@ app.post('/', (req, res)=>{
  
 
 });
-
-
-
-
-
-
 
 module.exports = app;
