@@ -16,7 +16,7 @@ var usuarioSchema = new Schema ({
     password: { type: String, required: false},
     img: { type: String, required: false },
     role: { type: String, required: true, default: 'USER_ROLE', enum: rolesValidos },
-    usuario:  { type: String, unique: true,required: [true,'Usuario es requerido']},
+    usuario:  { type: String,required: [true,'Usuario es requerido']},
     sponsor:  { type: String, required: [true,'El patrocinador es necesario']}
 });
 
