@@ -33,6 +33,9 @@ app.get('/coleccion/:tabla/:busqueda', (req, res) => {
         case 'usuario':
             promesa = buscarUsuario(busqueda, regex);
             break;
+        case 'sponsor':
+            promesa = buscarSponsor(busqueda, regex);
+            break;
 
         default:
             return res.status(400).json({
@@ -143,12 +146,33 @@ function buscarUsuario(busqueda, regex) {
 
     return new Promise((resolve, reject) => {
 
-        Usuario.find({}, 'usuario sponsor role')
-            .or([{ 'usuario': regex }, { 'sponsor': regex }])
+        Usuario.find({}, 'usuario  role')
+            .or({ 'usuario': regex })
             .exec((err, usuario) => {
 
                 if (err) {
-                    reject('Erro al cargar usuarios', err);
+                    reject('Error al cargar usuarios', err);
+                } else {
+                    resolve(usuario);
+                }
+
+
+            })
+
+
+    });
+}
+
+function buscarSponsor(busqueda, regex) {
+
+    return new Promise((resolve, reject) => {
+
+        Usuario.find({}, ' sponsor role')
+            .or([{ 'sponsor': regex }])
+            .exec((err, usuario) => {
+
+                if (err) {
+                    reject('Erro al cargar patrocinadores', err);
                 } else {
                     resolve(usuario);
                 }
