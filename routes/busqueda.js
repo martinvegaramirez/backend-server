@@ -146,7 +146,7 @@ function buscarUsuario(busqueda, regex) {
 
     return new Promise((resolve, reject) => {
 
-        Usuario.find({}, 'usuario  role')
+        Usuario.find({}, 'usuario nombre role')
             .or({ 'usuario': regex })
             .exec((err, usuario) => {
 
@@ -167,7 +167,7 @@ function buscarSponsor(busqueda, regex) {
 
     return new Promise((resolve, reject) => {
 
-        Usuario.find({}, ' sponsor role')
+        Usuario.find({}, ' sponsor nombre role')
             .or([{ 'sponsor': regex }])
             .exec((err, usuario) => {
 
