@@ -30,6 +30,9 @@ app.get('/coleccion/:tabla/:busqueda', (req, res) => {
         case 'hospitales':
             promesa = buscarHospitales(busqueda, regex);
             break;
+        case 'usuario':
+            promesa = buscarUsuario(busqueda, regex);
+            break;
 
         default:
             return res.status(400).json({
@@ -136,6 +139,26 @@ function buscarUsuarios(busqueda, regex) {
     });
 }
 
+function buscarUsuario(busqueda, regex) {
+
+    return new Promise((resolve, reject) => {
+
+        Usuario.find({}, 'usuario sponsor role')
+            .or([{ 'usuario': regex }, { 'sponsor': regex }])
+            .exec((err, usuario) => {
+
+                if (err) {
+                    reject('Erro al cargar usuarios', err);
+                } else {
+                    resolve(usuario);
+                }
+
+
+            })
+
+
+    });
+}
 
 
 module.exports = app;
