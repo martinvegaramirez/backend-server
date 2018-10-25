@@ -94,8 +94,50 @@ app.put('/:id',mdAutenticacion.verificaToken,(req,res)=>{
 
 
 //===============================
-//Crear un nuevo  usuario
+//Crear un nuevo  usuario  usuario- unique y apellidos
 //===============================
+app.post('/',(req, res)=>{
+
+    var body = req.body;
+
+    var usuario = new Usuario({
+        nombre: body.nombre,
+        apellido: body.apellido,
+        usuario: body.usuario,
+        password: bcrypt.hashSync(body.password,10),
+        img: body.img,
+        role: body.role,
+        sponsor: body.sponsor
+
+    });
+
+    usuario.save( (err,usuarioGuardado)=>{
+  
+        if (err) {
+            return res.status(400).json({    
+                ok: false,    
+                mensaje: 'Error al crear usuario',    
+                errors: err    
+            });    
+            
+        }     
+        
+        res.status(201).json({
+        ok: true,
+        usuario: usuarioGuardado,
+        usuariotoken: req.usuario
+        });
+
+    });
+
+    
+
+});
+
+//===============================
+//Crear un nuevo  usuario  --email unique
+//===============================
+/*Version Anterior con email como unique
 app.post('/',(req, res)=>{
 
     var body = req.body;
@@ -133,6 +175,8 @@ app.post('/',(req, res)=>{
     
 
 });
+*/
+
 
 //===============================
 //Borrar un nuevo  usuario por el id
