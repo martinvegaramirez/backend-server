@@ -12,11 +12,11 @@ var rolesValidos = {
 var usuarioSchema = new Schema ({
 
     nombre: { type: String, required: [true, 'El nombre es necesario']},
-    email:  { type: String, unique: true, required: [true,'El correo es necesario']},
+    apellido:  { type: String, required: [true,'El apellido es necesario']},
     password: { type: String, required: false},
     img: { type: String, required: false },
     role: { type: String, required: true, default: 'USER_ROLE', enum: rolesValidos },
-    usuario:  { type: String,required: [true,'Usuario es requerido']},
+    usuario:  { type: String, unique: true, required: [true,'Usuario es requerido']},
     sponsor:  { type: String, required: [true,'El patrocinador es necesario']}
 });
 
