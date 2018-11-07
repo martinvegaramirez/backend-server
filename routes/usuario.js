@@ -15,7 +15,7 @@ var Usuario = require('../models/usuario');
 //===============================
 app.get('/', (req,res,next) => {
 
-    Usuario.find({}, 'nombre email img role usuario sponsor' )
+    Usuario.find({}, 'nombre apellido img role usuario sponsor' )
         .exec (
             (err,usuarios) => {
                 if (err) {
@@ -67,7 +67,7 @@ app.put('/:id',mdAutenticacion.verificaToken,(req,res)=>{
         }
 
         usuario.nombre = body.nombre;
-        usuario.email = body.email;
+        usuario.apellido = body.apellido;
         usuario.role = body.role;
 
         usuario.save( (err,usuarioGuardado)=>{
